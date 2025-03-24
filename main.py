@@ -1,41 +1,27 @@
+import asyncio
+import logging
 import os
+from aiogram import Bot, Dispatcher
 from dotenv import load_dotenv
-from telegram.ext import Application, CommandHandler, MessageHandler, filters
+from survey import router as survey_router
+from menu import router as menu_router
+from callbacks import router as callback_router
 
 load_dotenv()
+TOKEN = os.getenv("TOKEN")
 
+bot = Bot(token=TOKEN)
+dp = Dispatcher()
 
-async def cmd_start(update, context):
-    await update.message.reply_text("Привет!")
+logging.basicConfig(level=logging.INFO)
 
+dp.include_router(survey_router)
+dp.include_router(menu_router)
+dp.include_router(callback_router)
 
-async def cmd_help(update, context):
-    help_text = (
-        "Доступные команды:\n"
-        "/start - начать общение\n"
-        "/help - показать справку\n"
-        "Отправьте любое сообщение, и бот его повторит."
-    )
-    await update.message.reply_text(help_text)
-
-
-async def echo(update, context):
-    user_text = update.message.text
-    await update.message.reply_text(user_text)
-
-
-def main():
-    token = os.getenv("TOKEN")
-
-    application = Application.builder().token(token).build()
-
-    application.add_handler(CommandHandler("start", cmd_start))
-    application.add_handler(CommandHandler("help", cmd_help))
-
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
-
-    application.run_polling()
-
+async def main():
+    print("Starting bot...")
+    await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
