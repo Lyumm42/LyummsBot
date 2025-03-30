@@ -1,11 +1,13 @@
 import asyncio
 import logging
 import os
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, Router
 from dotenv import load_dotenv
 from survey import router as survey_router
 from menu import router as menu_router
 from callbacks import router as callback_router
+
+
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -19,9 +21,13 @@ dp.include_router(survey_router)
 dp.include_router(menu_router)
 dp.include_router(callback_router)
 
+
 async def main():
     print("Starting bot...")
     await dp.start_polling(bot)
+
+    start_router = Router()
+
 
 if __name__ == "__main__":
     asyncio.run(main())

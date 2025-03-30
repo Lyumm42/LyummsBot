@@ -32,7 +32,7 @@ async def fetch_currency():
                 if currency_names and exchange_rates and len(currency_names) == len(exchange_rates):
                     message = "*Курс валют в Бишкеке:*\n"
                     for i in range(len(currency_names)):
-                        message += f"*{currency_names[i].upper()}*:\n   Покупка: `{exchange_rates[i][0]}` | Продажа: `{exchange_rates[i][1]}`\n\n"
+                        message += f"*{currency_names[i].upper()}*:\n   Покупка: `{exchange_rates[i][0]}` \n   Продажа: `{exchange_rates[i][1]}`\n\n"
                     return message
                 else:
                     return "Ошибка. Попробуйте позже."
@@ -49,10 +49,10 @@ async def fetch_weather():
             async with session.get(url, headers=headers, timeout=10) as response:
                 if response.status == 200:
                     weather, temp, wind, humidity = (await response.text()).split("|")
-                    return (f"Погода сегодня:\n"
+                    return (f"Погода в Бишкеке сейчас:\n"
                             f"{weather}\n"
                             f"Температура: {temp}\n"
-                            f"Влажность: {humidity}"
+                            f"Влажность: {humidity}\n"
                             f"Ветер: {wind}\n")
                 return "Ошибка при запросе погоды."
         except Exception:
