@@ -1,6 +1,6 @@
 from aiogram import Router, types
 from aiogram.filters import Command
-from kb import joke_menu, image_menu
+from kb import joke_menu, image_menu, main_keyboard
 from parsers import fetch_currency, fetch_weather, fetch_movies
 
 router = Router()
@@ -12,6 +12,8 @@ async def menu_handler(message: types.Message):
 
     if text == "шутка":
         await message.answer("Выберите категорию шуток:", reply_markup=joke_menu())
+    elif text == "/start":
+        await message.answer("Привет пользователь! Вот что я могу:", reply_markup= main_keyboard())
     elif text == "погода":
         weather = await fetch_weather()
         await message.answer(weather)
@@ -27,4 +29,4 @@ async def menu_handler(message: types.Message):
     elif text == "картинка":
         await message.answer("Выберите категорию изображения:", reply_markup=image_menu())
     else:
-        await message.answer("Неизвестная команда. Пошёл нахуй.")
+        await message.answer("Ошибка. Неизвестная команда.")

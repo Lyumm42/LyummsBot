@@ -1,15 +1,15 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
-from main import bot
 
 
-@bot.message.heandler(command=['start'])
-def start_menu():
-keyboard=[
-    [KeyboardButton(text="Картинка"), KeyboardButton(text="Погода")],
-    [KeyboardButton(text="Курс валют"), KeyboardButton(text="Список фильмов")],
-    [KeyboardButton(text="Шутка"), KeyboardButton(text="Опрос")]
-],
-
+def main_keyboard():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="погода"), KeyboardButton(text="курс валют")],
+            [KeyboardButton(text="картинка"), KeyboardButton(text="шутка")],
+            [KeyboardButton(text="список фильмов"), KeyboardButton(text="опрос")]
+        ],
+        resize_keyboard=True
+    )
 
 
 def image_menu():
