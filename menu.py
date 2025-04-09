@@ -1,5 +1,4 @@
 from aiogram import Router, types
-from aiogram.filters import Command
 from kb import joke_menu, image_menu, main_keyboard
 from parsers import fetch_currency, fetch_weather, fetch_movies
 
@@ -25,7 +24,7 @@ async def menu_handler(message: types.Message):
         movies = await fetch_movies()
         await message.answer(movies)
     elif text == "опрос":
-        await message.answer("Начнем опрос! Как вас зовут?")
+        await message.answer("Начнем опрос. Как вас зовут?")
     elif text == "картинка":
         await message.answer("Выберите категорию изображения:", reply_markup=image_menu())
     else:

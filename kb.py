@@ -25,7 +25,7 @@ def image_menu():
 def joke_menu():
     return InlineKeyboardMarkup(inline_keyboard=[
         [
-            InlineKeyboardButton(text="программисты", callback_data="joke_programming"),
-            InlineKeyboardButton(text="черный юмор", callback_data="joke_dark"),
+            InlineKeyboardButton(text="про программистов", callback_data="joke_programming"),
+            InlineKeyboardButton(text="с черным юмором", callback_data="joke_dark"),
         ]
     ])

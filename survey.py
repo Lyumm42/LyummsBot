@@ -54,9 +54,9 @@ async def start_survey(message: types.Message, state: FSMContext):
             f"3. Любимый цвет: {existing_data[4]}\n"
             f"4. Любимый предмет: {existing_data[5]}\n"
             f"5. Любимый фильм: {existing_data[6]}\n"
-            f"6. {existing_data[7]}\n"
-            f"7. {existing_data[8]}\n"
-            f"8. {existing_data[9]}"
+            f"6. Любимый стример: {existing_data[7]}\n"
+            f"7. Любимое блюдо: {existing_data[8]}\n"
+            f"8. Любимое хобби: {existing_data[9]}"
         )
         await message.answer(result_text)
         conn.close()
@@ -116,7 +116,7 @@ async def survey_q6(message: types.Message, state: FSMContext):
 @router.message(Survey.q7)
 async def survey_q7(message: types.Message, state: FSMContext):
     await state.update_data(q7=message.text)
-    await message.answer("8. Последний вопрос: Ваше хобби?")
+    await message.answer("8. Ваше любимое хобби?")
     await state.set_state(Survey.q8)
 
 
