@@ -1,10 +1,11 @@
+import aiohttp
 import os
 import random
 
 from bs4 import BeautifulSoup
-import aiohttp
 
-async def fetch_currency():
+
+async def get_currency():
     url = "https://valuta.kg/"
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
@@ -20,7 +21,7 @@ async def fetch_currency():
                         if currency_div:
                             currency_names.append(currency_div.text.strip())
                 exchange_rates = []
-                rates_table = soup.find_all("table", class_="kurs-table")[1]  # Вторая таблица
+                rates_table = soup.find_all("table", class_="kurs-table")[1]
                 if rates_table:
                     rows = rates_table.find_all("tr")
                     for row in rows:
@@ -39,8 +40,7 @@ async def fetch_currency():
             return "Ошибка при подключении к сайту курса валют."
 
 
-
-async def fetch_weather():
+async def get_weather():
     url = 'https://wttr.in/Bishkek?format=%C|%t|%w|%h'
     headers = {"User-Agent": "Mozilla/5.0"}
 
@@ -59,7 +59,7 @@ async def fetch_weather():
             return "Ошибка. Не удалось получить прогноз."
 
 
-async def fetch_movies():
+async def get_movies():
     url = "https://kg.kinoafisha.info/bishkek/movies/"
     headers = {"User-Agent": "Mozilla/5.0"}
 
@@ -85,7 +85,7 @@ async def fetch_movies():
             return "Ошибка. Не удалось загрузить фильмы."
 
 
-async def fetch_joke(category="Any"):
+async def get_joke(category="Any"):
     url = f"https://v2.jokeapi.dev/joke/{category}"
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:

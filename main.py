@@ -8,7 +8,6 @@ from menu import router as menu_router
 from callbacks import router as callback_router
 
 
-
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
@@ -16,6 +15,7 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 logging.basicConfig(level=logging.INFO)
+
 
 dp.include_router(survey_router)
 dp.include_router(menu_router)
